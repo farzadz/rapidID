@@ -16,12 +16,13 @@
 
 from setuptools import setup
 
-setup(name='jupyterhub-rapid-authenticator',
+setup(name='rapidAuthenticator',
       version='0.1',
       description='The authenticator for JupyterHub using AAF Rapid connect.',
       url='https://github.com/farzadz/rapidID',
       author='Farzadz',
       author_email='f.vazirnia@student.unimelb.edu.au',
+      install_requires=['PyJWT'],
       license='3 Clause BSD',
       packages=['AAFAuthenticator'],
       zip_safe=False)
