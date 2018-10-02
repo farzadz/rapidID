@@ -22,7 +22,7 @@ setup(name='rapidAuthenticator',
       url='https://github.com/farzadz/rapidID',
       author='Farzadz',
       author_email='f.vazirnia@student.unimelb.edu.au',
-      install_requires=['PyJWT'],
+      install_requires=['PyJWT>=1.6'],
       license='3 Clause BSD',
       packages=['AAFAuthenticator'],
       zip_safe=False)
