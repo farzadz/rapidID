@@ -6,7 +6,7 @@ Base classes for Rapid Authenticator
 import os
 import jwt
 from tornado import gen, web
-
+import base64
 from jupyterhub.handlers import BaseHandler
 from jupyterhub.auth import Authenticator
 from jupyterhub.utils import url_path_join
@@ -93,5 +93,5 @@ class AAFAuthenticator(Authenticator):
         assertion = jwt.decode(data , self.jwt_secret, options={'verify_aud': False})
         self.log.info(str(assertion))
         assertion = assertion["https://aaf.edu.au/attributes"]
-        return {'name': assertion['mail']}
+        return {'name': base64.b32encode(assertion['mail'].encode()).decode('utf-8')}
 
