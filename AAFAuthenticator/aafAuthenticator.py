@@ -36,6 +36,7 @@ class AAFCallbackHandler(BaseHandler):
         user = yield self.login_user(data=self.get_argument("assertion"))
         if user is None:
             raise web.HTTPError(403)
+        self.set_login_cookie(user)
         self.redirect(self.get_next_url(user))
 
 
