@@ -1,6 +1,4 @@
 #
-# Copyright 2015-2017, Bloomberg Finance L.P.
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -17,7 +15,7 @@
 from setuptools import setup
 
 setup(name='rapidAuthenticator',
-      version='0.1',
+      version='0.5',
       description='The authenticator for JupyterHub using AAF Rapid connect.',
       url='https://github.com/farzadz/rapidID',
       author='Farzadz',

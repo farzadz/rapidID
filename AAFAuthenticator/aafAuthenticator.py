@@ -11,7 +11,7 @@ from jupyterhub.handlers import BaseHandler
 from jupyterhub.auth import Authenticator
 from jupyterhub.utils import url_path_join
 
-from traitlets import Unicode, Bool, List
+from traitlets import Unicode
 
 
 
@@ -21,9 +21,6 @@ class AAFLoginHandler(BaseHandler):
     def get(self):
         external_login_url = self.authenticator.get_external_login_url(self)
         self.log.info('AAF redirect: %r', external_login_url)
-        # self.authorize_redirect(
-        #     redirect_uri=redirect_uri
-        # )
         self.redirect(external_login_url)
 
 
@@ -61,9 +58,6 @@ class AAFAuthenticator(Authenticator):
     )
 
     login_service = 'AAF'
-    # callback_url = Unicode(
-    #     "https://juno-dev.aurin.org.au/hub/callback"
-    # )
 
     def login_url(self, base_url):
         return url_path_join(base_url, 'login')
@@ -88,11 +82,8 @@ class AAFAuthenticator(Authenticator):
 
     @gen.coroutine
     def authenticate(self, handler, data=None):
-
-        self.log.info("Inside authenticate ***** {} data is: {}".format(type(data),str(data)))
-
         assertion = jwt.decode(data , self.jwt_secret, options={'verify_aud': False})
         self.log.info(str(assertion))
         assertion = assertion["https://aaf.edu.au/attributes"]
-        return {'name': assertion["displayname"].replace(" ", ""), "auth_state": assertion }
+        return {'name': base64.b32encode(assertion['mail'].encode()).decode('utf-8').strip("="), "auth_state": assertion}
 
