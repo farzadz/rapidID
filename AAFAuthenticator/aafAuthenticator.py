@@ -93,5 +93,5 @@ class AAFAuthenticator(Authenticator):
         assertion = jwt.decode(data , self.jwt_secret, options={'verify_aud': False})
         self.log.info(str(assertion))
         assertion = assertion["https://aaf.edu.au/attributes"]
-        return {'name': base64.b32encode(assertion['mail'].encode()).decode('utf-8')}
+        return {'name': assertion["displayname"].replace(" ", ""), "auth_state": assertion }
 
