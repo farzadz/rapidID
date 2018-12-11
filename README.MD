@@ -14,4 +14,4 @@ c.AAFAuthenticator.jwt_secret = "secret with which AAF jwt tokens signed"
 ```
 The callback url in AAF admin panel should be set to "https://example.com/hub/callback".
 Since AAF only redirects users to HTTPS enabled urls, you are required to obtain certificates prior to using this mechanism.
-It uses base32 to encode email address of users. 
+It uses base32 to encode email address of users as of their username with some alterations: Changes the encoded string to lowercase and removes succeeding `=` signs. 
